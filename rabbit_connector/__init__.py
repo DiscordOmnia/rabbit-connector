@@ -1,5 +1,3 @@
 from .client import RabbitClient
 
-__all__ = (
-    "RabbitClient",
-)
+__all__ = ("RabbitClient",)
