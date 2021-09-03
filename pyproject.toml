@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "rabbit-connector"
+version = "1.0.0"
+description = "An async RabbitMQ connector."
+authors = ["vcokltfre <vcokltfre@gmail.com>"]
+repository = "https://github.com/DiscordOtto/rabbit-connector"
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+loguru = "^0.5.3"
+aio-pika = "^6.8.0"
+orjson = "^3.6.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
