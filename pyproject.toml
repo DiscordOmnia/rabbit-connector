@@ -3,7 +3,7 @@ name = "rabbit-connector"
 version = "1.0.0"
 description = "An async RabbitMQ connector."
 authors = ["vcokltfre <vcokltfre@gmail.com>"]
-repository = "https://github.com/DiscordOtto/rabbit-connector"
+repository = "https://github.com/DiscordOmnia/rabbit-connector"
 license = "MIT"
 readme = "README.md"
 
