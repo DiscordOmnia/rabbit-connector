@@ -4,7 +4,7 @@ A simple wrapper around RabbitMQ to allow sending and iterating over JSON messag
 
 ## Installation
 
-`pip3 install git+https://github.com/DiscordOtto/rabbit-connector`
+`pip3 install git+https://github.com/DiscordOmnia/rabbit-connector`
 
 ## Basic Usage
 
