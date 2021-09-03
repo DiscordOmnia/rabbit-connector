@@ -3,6 +3,7 @@ from typing import List, Dict, Union, Optional
 
 from aio_pika import Connection, Channel, Message, connect_robust
 from aio_pika.exceptions import QueueEmpty
+from loguru import logger
 from orjson import dumps, loads
 
 
@@ -26,6 +27,7 @@ class JSONMessageIterator:
         while True:
             try:
                 message = await self._queue.get(no_ack=True)
+                logger.trace(f"RabbitMQ [{self._type}]: received message: {message.body.decode('utf-8')}")  # type: ignore
                 return loads(message.body)  # type: ignore
             except QueueEmpty:
                 backoff = min(backoff * 2, 0.25)
@@ -45,17 +47,23 @@ class RabbitClient:
         self._connection = await connect_robust(self.uri)
         self._channel = await self._connection.channel()
 
+        logger.debug(f"RabbitMQ [{self.type}]: connection established.")
+
     async def send(self, data: JSON) -> None:
         if not self._connection:
             await self._connect()
 
+        raw = dumps(data)
+
         await self._channel.default_exchange.publish(  # type: ignore
             Message(
-                body=dumps(data),
+                body=raw,
                 content_type="application/json",
             ),
             self.type,
         )
+
+        logger.trace(f"RabbitMQ [{self.type}]: message sent: {raw.decode('utf-8')}")
 
     async def iter_json(self) -> JSONMessageIterator:
         if not self._connection:
